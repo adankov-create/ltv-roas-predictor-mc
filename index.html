@@ -10,45 +10,44 @@
     --panel:#ffffff;
     --ink:#1b1f24;
     --muted:#6b7280;
+    --faint:#9aa3af;
     --line:#e3e6ea;
     --input-bg:#eef4ff;
     --input-border:#b8ccf2;
-    --result-bg:#ffffff;
-    --pos:#1a7f4b;
-    --neg:#c0392b;
     --accent:#2f5fd0;
     --accent-soft:#e8eefc;
     --kpi-bg:#f8fafc;
+    --pos:#1a7f4b;
+    --cpa-line:#3a4048;
   }
   *{box-sizing:border-box;}
   body{
-    margin:0;
-    background:var(--bg);
-    color:var(--ink);
+    margin:0;background:var(--bg);color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    font-size:14px;
-    line-height:1.45;
+    font-size:14px;line-height:1.45;
   }
   .wrap{max-width:1360px;margin:0 auto;padding:20px;}
-  header.top{
-    display:flex;align-items:baseline;justify-content:space-between;
-    gap:16px;flex-wrap:wrap;margin-bottom:16px;
-  }
+  header.top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px;}
   header.top h1{font-size:20px;margin:0;font-weight:700;}
   header.top .sub{color:var(--muted);font-size:13px;}
-
   .legend{display:flex;gap:16px;align-items:center;font-size:12px;color:var(--muted);flex-wrap:wrap;}
   .swatch{display:inline-flex;align-items:center;gap:6px;}
   .swatch i{width:14px;height:14px;border-radius:3px;display:inline-block;border:1px solid var(--line);}
   .swatch.in i{background:var(--input-bg);border-color:var(--input-border);}
-  .swatch.out i{background:var(--result-bg);}
+  .swatch.out i{background:#fff;}
 
-  .grid{display:grid;grid-template-columns:340px 1fr;gap:20px;align-items:start;}
-  @media(max-width:900px){.grid{grid-template-columns:1fr;}}
+  .section-title{font-size:12px;font-weight:700;letter-spacing:.4px;color:var(--muted);text-transform:uppercase;margin:26px 0 10px;}
+  .section-title:first-of-type{margin-top:0;}
 
   .panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;}
-  .panel h2{font-size:13px;text-transform:none;margin:0 0 12px;font-weight:700;letter-spacing:.2px;}
-  .panel .h-note{font-size:11px;color:var(--muted);font-weight:400;}
+  .panel h3{font-size:13px;margin:0 0 12px;font-weight:700;}
+  .panel h3 .h-note{font-size:11px;color:var(--muted);font-weight:400;}
+
+  /* two-column blocks */
+  .two-col{display:grid;grid-template-columns:340px 1fr;gap:20px;align-items:start;}
+  @media(max-width:900px){.two-col{grid-template-columns:1fr;}}
+  .ret-cpa{display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start;}
+  @media(max-width:900px){.ret-cpa{grid-template-columns:1fr;}}
 
   /* INPUTS */
   .inputs .field{margin-bottom:12px;}
@@ -59,76 +58,69 @@
   }
   .inputs input:focus{outline:2px solid var(--accent);outline-offset:0;}
   .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-  .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
   .hint{font-size:11px;color:var(--muted);margin-top:3px;}
-
   fieldset.section{border:1px solid var(--line);border-radius:8px;padding:12px;margin:0 0 14px;}
+  fieldset.section:last-child{margin-bottom:0;}
   fieldset.section legend{font-size:12px;font-weight:700;padding:0 6px;color:var(--ink);}
 
-  /* MODE TOGGLE */
-  .mode-box{background:#fff8e6;border:2px solid #f0c419;border-radius:10px;padding:14px;margin-bottom:16px;}
-  .mode-box .mode-title{font-weight:700;font-size:13px;margin-bottom:10px;}
-  .mode-switch{display:flex;border:1px solid var(--input-border);border-radius:8px;overflow:hidden;}
-  .mode-switch button{
-    flex:1;padding:10px 8px;font-size:12.5px;font-weight:600;border:none;cursor:pointer;
-    background:#fff;color:var(--ink);line-height:1.2;
-  }
-  .mode-switch button.active{background:var(--accent);color:#fff;}
-  .mode-explain{font-size:11.5px;color:#555;margin-top:10px;}
-  .mode-explain b{color:var(--ink);}
-  .mode-explain .ex{background:#fff;border:1px solid var(--line);border-radius:6px;padding:8px;margin-top:6px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;white-space:pre-line;}
+  .note{font-size:11.5px;color:var(--muted);margin:0 0 10px;}
 
-  .ret-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
-  .ret-grid .rf label{font-size:11px;}
-  .ret-grid input{padding:6px 8px;font-size:13px;}
+  /* retention grid */
+  .ret-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+  @media(max-width:560px){.ret-grid{grid-template-columns:1fr 1fr;}}
+  .ret-grid .rf label{font-size:11px;color:var(--muted);display:block;margin-bottom:4px;}
+  .ret-grid .rf input{width:100%;padding:6px 8px;font-size:14px;font-weight:600;background:var(--input-bg);border:1px solid var(--input-border);border-radius:6px;color:var(--ink);}
+  .ret-grid .rf .tgt{font-size:10.5px;color:var(--faint);margin-top:3px;line-height:1.3;}
 
-  .scn-list .scn-item{display:flex;gap:8px;align-items:center;margin-bottom:6px;}
-  .scn-list .scn-item input{flex:1;padding:6px 8px;font-size:13px;}
-  .scn-list button.rm{border:1px solid var(--line);background:#fff;border-radius:6px;width:30px;height:30px;cursor:pointer;color:var(--neg);font-weight:700;}
+  /* scenario inputs */
+  .scn-list .scn-item{display:flex;gap:6px;align-items:center;margin-bottom:6px;}
+  .scn-list .scn-item input{flex:1;padding:6px 8px;font-size:13px;font-weight:600;background:var(--input-bg);border:1px solid var(--input-border);border-radius:6px;}
+  .scn-list button.rm{border:1px solid var(--line);background:#fff;border-radius:6px;width:28px;height:30px;cursor:pointer;color:var(--muted);font-weight:700;}
+  .scn-list button.rm:hover{color:var(--ink);}
   .btn{border:1px solid var(--input-border);background:#fff;border-radius:6px;padding:8px 12px;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--accent);}
   .btn:hover{background:var(--accent-soft);}
-  .btn.reset{color:var(--neg);border-color:#e6b8b8;}
-  .btn.reset:hover{background:#fbeaea;}
+  .btn.reset{color:var(--muted);border-color:var(--line);}
+  .btn.reset:hover{background:#f0f1f3;color:var(--ink);}
   .btn-row{display:flex;gap:8px;margin-top:8px;}
 
-  /* RESULTS */
-  .results{display:flex;flex-direction:column;gap:20px;}
-  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}
-  @media(max-width:1100px){.kpis{grid-template-columns:repeat(3,1fr);}}
+  /* KPI cards */
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
   @media(max-width:560px){.kpis{grid-template-columns:repeat(2,1fr);}}
   .kpi{background:var(--kpi-bg);border:1px solid var(--line);border-radius:8px;padding:12px;}
   .kpi .k-label{font-size:11px;color:var(--muted);margin-bottom:4px;}
-  .kpi .k-val{font-size:22px;font-weight:700;line-height:1.1;}
+  .kpi .k-val{font-size:20px;font-weight:700;line-height:1.1;}
   .kpi .k-sub{font-size:11px;color:var(--muted);margin-top:2px;}
   .kpi.hero{background:var(--accent-soft);border-color:var(--input-border);}
+  .kpi.hero .k-val{font-size:26px;}
 
   table{width:100%;border-collapse:collapse;font-size:12.5px;}
   th,td{padding:7px 8px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap;}
   th:first-child,td:first-child{text-align:left;}
-  thead th{color:var(--muted);font-weight:600;font-size:11.5px;background:#fafbfc;position:sticky;top:0;}
+  thead th{color:var(--muted);font-weight:600;font-size:11.5px;background:#fafbfc;}
   tbody tr:hover{background:#f6f9ff;}
   .table-scroll{overflow-x:auto;}
-  .pos{color:var(--pos);font-weight:600;}
-  .neg{color:var(--neg);font-weight:600;}
+  .neg{color:var(--muted);}
+  .pos{color:var(--pos);}
+  .row-payback{background:#f1f8f4;}
   .payback-cell{font-weight:600;}
-  .row-payback{background:#eafaf0;}
 
-  /* chart */
+  /* chart + breakeven */
   .chart-wrap{width:100%;overflow-x:auto;}
   svg{display:block;max-width:100%;}
-  .chart-legend{display:flex;gap:18px;font-size:12px;color:var(--muted);margin-top:6px;flex-wrap:wrap;}
+  .chart-legend{display:flex;gap:18px;font-size:12px;color:var(--muted);margin:6px 0 14px;flex-wrap:wrap;}
   .chart-legend .ll{display:inline-flex;align-items:center;gap:6px;}
   .chart-legend .ll i{width:18px;height:0;border-top-width:3px;border-top-style:solid;display:inline-block;}
-
-  /* break-even */
-  .be-block{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
-  @media(max-width:700px){.be-block{grid-template-columns:1fr;}}
-  .be-item{border:1px solid var(--line);border-radius:8px;padding:12px;background:var(--kpi-bg);}
+  .be-row{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;border-top:1px solid var(--line);padding-top:14px;}
+  @media(max-width:800px){.be-row{grid-template-columns:repeat(3,1fr);}}
+  @media(max-width:480px){.be-row{grid-template-columns:repeat(2,1fr);}}
   .be-item .be-l{font-size:11px;color:var(--muted);}
-  .be-item .be-v{font-size:20px;font-weight:700;margin-top:2px;}
-  .verdict{margin-top:14px;padding:12px 14px;border-radius:8px;font-weight:600;font-size:14px;}
-  .verdict.good{background:#eafaf0;border:1px solid #b7e3c6;color:var(--pos);}
-  .verdict.bad{background:#fbeaea;border:1px solid #e6b8b8;color:var(--neg);}
+  .be-item .be-v{font-size:17px;font-weight:700;margin-top:2px;}
+
+  .panel-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
+  .panel-head h3{margin:0;}
+  .final-ltv{text-align:right;}
+  .final-ltv .fl-l{font-size:10.5px;color:var(--muted);letter-spacing:.4px;text-transform:uppercase;}
+  .final-ltv .fl-v{font-size:20px;font-weight:700;color:var(--accent);}
 </style>
 </head>
 <body>
@@ -136,7 +128,7 @@
   <header class="top">
     <div>
       <h1>LTV / ROAS Predictor</h1>
-      <div class="sub">Subscription unit economics — all monetary results shown in EUR</div>
+      <div class="sub">Subscription unit economics — results in EUR</div>
     </div>
     <div class="legend">
       <span class="swatch in"><i></i> Input</span>
@@ -144,24 +136,16 @@
     </div>
   </header>
 
-  <div class="grid">
-    <!-- ================= INPUTS ================= -->
+  <!-- ================= CURRENT ECONOMICS ================= -->
+  <div class="section-title">Current economics</div>
+  <div class="two-col">
+    <!-- left: inputs -->
     <div class="panel inputs">
-      <h2>Inputs <span class="h-note">— editable</span></h2>
-
-      <div class="mode-box">
-        <div class="mode-title">Retention calculation mode</div>
-        <div class="mode-switch">
-          <button id="modeCohort" class="active" onclick="setMode('cohort')">Mode 1 · Cohort<br><span style="font-weight:400">% of original trial cohort still paying</span></button>
-          <button id="modeM2M" onclick="setMode('m2m')">Mode 2 · Month-to-month<br><span style="font-weight:400">% of previous month's subscribers retained</span></button>
-        </div>
-        <div class="mode-explain" id="modeExplain"></div>
-      </div>
-
+      <h3>Current inputs <span class="h-note">— editable</span></h3>
       <fieldset class="section">
         <legend>Acquisition</legend>
         <div class="field">
-          <label>Base CPA (€)</label>
+          <label>Current CPA (€)</label>
           <input type="number" id="baseCPA" step="1" value="40">
         </div>
         <div class="field">
@@ -174,7 +158,6 @@
           <input type="number" id="usdEur" step="0.00001" value="0.87639">
         </div>
       </fieldset>
-
       <fieldset class="section">
         <legend>Pricing (USD)</legend>
         <div class="row2">
@@ -188,62 +171,70 @@
           </div>
         </div>
       </fieldset>
+    </div>
 
-      <fieldset class="section">
-        <legend>Retention curve (%)</legend>
-        <div class="hint" style="margin-bottom:8px">M1 = Trial → M1 conversion. M2–M12 interpreted per the mode above.</div>
+    <!-- right: results -->
+    <div class="panel">
+      <h3>Current results <span class="h-note">— live</span></h3>
+      <div class="kpis" id="kpis"></div>
+    </div>
+  </div>
+
+  <!-- ================= RETENTION & CPA SCENARIOS ================= -->
+  <div class="section-title">Retention &amp; CPA scenarios</div>
+  <div class="panel">
+    <div class="ret-cpa">
+      <!-- retention -->
+      <div>
+        <h3>Retention curve <span class="h-note">— editable</span></h3>
+        <p class="note">Each month shows the % of the original trial cohort still paying.</p>
         <div class="ret-grid" id="retGrid"></div>
-      </fieldset>
-
-      <fieldset class="section">
-        <legend>CPA scenarios (€)</legend>
+        <p class="note" style="margin-top:12px">Target = reference curve for ~100% ROAS around M6 at the default €40 CPA.</p>
+      </div>
+      <!-- cpa scenarios -->
+      <div>
+        <h3>CPA scenarios <span class="h-note">— editable</span></h3>
         <div class="scn-list" id="scnList"></div>
         <div class="btn-row">
           <button class="btn" onclick="addScenario()">+ Add scenario</button>
         </div>
-      </fieldset>
-
-      <div class="btn-row">
-        <button class="btn reset" onclick="resetAll()">Reset to defaults</button>
       </div>
     </div>
 
-    <!-- ================= RESULTS ================= -->
-    <div class="results">
-      <div class="panel">
-        <h2>Key metrics <span class="h-note">— live</span></h2>
-        <div class="kpis" id="kpis"></div>
-      </div>
+    <h3 style="margin:20px 0 12px">CPA scenario comparison</h3>
+    <div class="table-scroll">
+      <table id="scnTable"></table>
+    </div>
+  </div>
 
-      <div class="panel">
-        <h2>Break-even</h2>
-        <div class="be-block" id="beBlock"></div>
-        <div id="verdict"></div>
-      </div>
+  <!-- ================= CHART + BREAK-EVEN ================= -->
+  <div class="section-title">Cumulative LTV vs current CPA</div>
+  <div class="panel">
+    <div class="chart-wrap" id="chart"></div>
+    <div class="chart-legend">
+      <span class="ll"><i style="border-top-color:#2f5fd0"></i> Cumulative LTV (EUR)</span>
+      <span class="ll"><i style="border-top-color:#3a4048;border-top-style:dashed"></i> Current CPA</span>
+    </div>
+    <div class="be-row" id="beRow"></div>
+  </div>
 
-      <div class="panel">
-        <h2>Cumulative LTV vs CPA</h2>
-        <div class="chart-wrap" id="chart"></div>
-        <div class="chart-legend">
-          <span class="ll"><i style="border-top-color:#2f5fd0"></i> Cumulative LTV (EUR)</span>
-          <span class="ll"><i style="border-top-color:#c0392b;border-top-style:dashed"></i> Base CPA</span>
-        </div>
-      </div>
-
-      <div class="panel">
-        <h2>CPA scenario comparison</h2>
-        <div class="table-scroll">
-          <table id="scnTable"></table>
-        </div>
-      </div>
-
-      <div class="panel">
-        <h2>Monthly cohort table</h2>
-        <div class="table-scroll">
-          <table id="monthTable"></table>
-        </div>
+  <!-- ================= MONTHLY TABLE ================= -->
+  <div class="section-title">Monthly cohort table</div>
+  <div class="panel">
+    <div class="panel-head">
+      <h3>Cohort breakdown by month</h3>
+      <div class="final-ltv">
+        <div class="fl-l">Final LTV · M12</div>
+        <div class="fl-v" id="finalLtv">€0.00</div>
       </div>
     </div>
+    <div class="table-scroll">
+      <table id="monthTable"></table>
+    </div>
+  </div>
+
+  <div class="btn-row" style="margin-top:20px">
+    <button class="btn reset" onclick="resetAll()">Reset to defaults</button>
   </div>
 </div>
 
@@ -259,27 +250,30 @@
     monthlyPrice: 29.99,
     // index 0 = M1 (Trial->M1), 1 = M2 ... 11 = M12
     pct: [40,25,15,10,8,3,0,0,0,0,0,0],
-    mode: 'cohort',
     scenarios: [30,40,50,60,70,80]
   };
 
-  var state = clone(DEFAULTS);
+  // reference target retention (M1..M6) for ~100% ROAS around M6 at default €40 CPA
+  var TARGETS = ['40%','~32%','~26%','~20%','~17%','~14%'];
 
+  var state = clone(DEFAULTS);
   function clone(o){ return JSON.parse(JSON.stringify(o)); }
   function num(id){ var v = parseFloat(document.getElementById(id).value); return isNaN(v)?0:v; }
 
   var monthLabels = ['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10','M11','M12'];
 
-  // ---------- build dynamic input controls ----------
+  // ---------- build retention inputs ----------
   function buildRetGrid(){
     var g = document.getElementById('retGrid');
     g.innerHTML = '';
     for(var i=0;i<12;i++){
       var d = document.createElement('div');
-      d.className = 'rf field';
-      d.style.marginBottom = '0';
+      d.className = 'rf';
       var lab = (i===0) ? 'M1 (Trial→M1)' : monthLabels[i];
-      d.innerHTML = '<label>'+lab+'</label><input type="number" step="1" data-ret="'+i+'" value="'+state.pct[i]+'">';
+      var tgt = (i<6)
+        ? '<div class="tgt">Default '+DEFAULTS.pct[i]+'% · Target '+TARGETS[i]+'</div>'
+        : '<div class="tgt">Default '+DEFAULTS.pct[i]+'%</div>';
+      d.innerHTML = '<label>'+lab+'</label><input type="number" step="1" data-ret="'+i+'" value="'+state.pct[i]+'">'+tgt;
       g.appendChild(d);
     }
     var ins = g.querySelectorAll('input');
@@ -291,6 +285,7 @@
     render();
   }
 
+  // ---------- build scenario inputs ----------
   function buildScenarios(){
     var list = document.getElementById('scnList');
     list.innerHTML = '';
@@ -317,26 +312,7 @@
   }
   window.addScenario = function(){ state.scenarios.push(50); buildScenarios(); render(); };
 
-  // ---------- mode ----------
-  window.setMode = function(m){
-    state.mode = m;
-    document.getElementById('modeCohort').classList.toggle('active', m==='cohort');
-    document.getElementById('modeM2M').classList.toggle('active', m==='m2m');
-    updateModeExplain();
-    render();
-  };
-  function updateModeExplain(){
-    var el = document.getElementById('modeExplain');
-    if(state.mode==='cohort'){
-      el.innerHTML = '<b>Cohort mode:</b> each monthly % is a share of the <b>original</b> trial cohort. Percentages are not multiplied together.'+
-        '<div class="ex">Cohort = 1,000\nM1 40% → 400 paying\nM2 25% → 250 paying\nM3 15% → 150 paying</div>';
-    } else {
-      el.innerHTML = '<b>Month-to-month mode:</b> each % (from M2) is a share of the <b>previous month\'s</b> subscribers.'+
-        '<div class="ex">M1 40% → 400 paying\nM2 = 400 × 25% → 100\nM3 = 100 × 15% → 15</div>';
-    }
-  }
-
-  // ---------- core calc ----------
+  // ---------- core calc (cohort retention only) ----------
   function compute(cpa, forcedUsers){
     var baseCPA = num('baseCPA');
     var adSpend = num('adSpend');
@@ -351,13 +327,10 @@
     }
     var spend = (adSpend>0) ? adSpend : users*useCPA;
 
-    // paying users per month (index 0..11 => M1..M12)
+    // paying users per month (index 0..11 => M1..M12): cohort share of original users
     var paying = [];
     for(var i=0;i<12;i++){
-      var p = state.pct[i]/100;
-      if(i===0){ paying[i] = users*p; }
-      else if(state.mode==='cohort'){ paying[i] = users*p; }
-      else { paying[i] = paying[i-1]*p; }
+      paying[i] = users * (state.pct[i]/100);
     }
 
     // revenue in EUR. index 0 = Trial, 1..12 = M1..M12
@@ -377,67 +350,53 @@
     for(var k=0;k<=12;k++){ if(ltv[k] >= useCPA){ payback = k; break; } }
 
     var payingFull = [users].concat(paying); // index 0 = trial users
-
     return {users:users, spend:spend, cpa:useCPA,
       paying:payingFull, monthlyRev:monthlyRev, cumRev:cumRev,
       ltv:ltv, roas:roas, profit:profit, payback:payback};
   }
 
   // ---------- formatting ----------
-  function eur(n){
-    var neg = n<0; n = Math.abs(n);
-    var s = '€'+n.toLocaleString('en-US',{minimumFractionDigits:2, maximumFractionDigits:2});
-    return neg ? '-'+s : s;
-  }
-  function eur0(n){
-    var neg = n<0; n = Math.abs(n);
-    var s = '€'+n.toLocaleString('en-US',{minimumFractionDigits:0, maximumFractionDigits:0});
-    return neg ? '-'+s : s;
-  }
+  function eur(n){var neg=n<0;n=Math.abs(n);var s='€'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});return neg?'-'+s:s;}
+  function eur0(n){var neg=n<0;n=Math.abs(n);var s='€'+n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});return neg?'-'+s:s;}
   function pctFmt(x){ return (x*100).toFixed(0)+'%'; }
   function usersFmt(n){ return Math.round(n).toLocaleString('en-US'); }
   function paybackLabel(p){ return p<0 ? '>12' : (p===0 ? 'Trial' : 'M'+p); }
-  function signClass(n){ return n>=0 ? 'pos':'neg'; }
+  function profitClass(n){ return n>=0 ? 'pos':'neg'; }
 
   // ---------- render ----------
   function render(){
     var base = compute();
 
-    // KPI cards
+    // CURRENT RESULTS cards (no Current CPA card)
     var kpis = document.getElementById('kpis');
     var cards = [
-      {l:'Base CPA', v:eur(base.cpa), s:(num('adSpend')>0?'from ad spend':'fixed cohort 1,000'), hero:true},
       {l:'LTV · M1', v:eur(base.ltv[1])},
       {l:'LTV · M3', v:eur(base.ltv[3])},
       {l:'LTV · M6', v:eur(base.ltv[6])},
-      {l:'LTV · M12', v:eur(base.ltv[12])},
       {l:'ROAS · M6', v:pctFmt(base.roas[6]), s:'LTV M6 / CPA'},
       {l:'ROAS · M12', v:pctFmt(base.roas[12]), s:'LTV M12 / CPA'},
-      {l:'Break-even CPA · M6', v:eur(base.ltv[6]), s:'max CPA for 100% ROAS'},
-      {l:'Break-even CPA · M12', v:eur(base.ltv[12]), s:'max CPA for 100% ROAS'},
-      {l:'Payback month', v:paybackLabel(base.payback), s:(base.payback<0?'not within 12m':'LTV ≥ CPA'), hero:true}
+      {l:'Payback month', v:paybackLabel(base.payback), s:(base.payback<0?'not within 12m':'LTV ≥ CPA')},
+      {l:'Break-even CPA · M6', v:eur(base.ltv[6]), s:'max CPA · 100% ROAS'},
+      {l:'Break-even CPA · M12', v:eur(base.ltv[12]), s:'max CPA · 100% ROAS'},
+      {l:'LTV · M12', v:eur(base.ltv[12]), s:'12-month value / user', hero:true}
     ];
     kpis.innerHTML = cards.map(function(c){
       return '<div class="kpi'+(c.hero?' hero':'')+'"><div class="k-label">'+c.l+'</div><div class="k-val">'+c.v+'</div>'+(c.s?'<div class="k-sub">'+c.s+'</div>':'')+'</div>';
     }).join('');
 
-    // Break-even block
-    var be = document.getElementById('beBlock');
-    be.innerHTML =
-      '<div class="be-item"><div class="be-l">Your current CPA</div><div class="be-v">'+eur(base.cpa)+'</div></div>'+
-      '<div class="be-item"><div class="be-l">Your LTV by M6</div><div class="be-v">'+eur(base.ltv[6])+'</div></div>'+
-      '<div class="be-item"><div class="be-l">Max CPA for 100% ROAS by M6</div><div class="be-v">'+eur(base.ltv[6])+'</div></div>';
-    var vd = document.getElementById('verdict');
-    if(base.payback<0){
-      vd.innerHTML = '<div class="verdict bad">Does not pay back within 12 months at €'+base.cpa.toFixed(2)+' CPA.</div>';
-    } else {
-      vd.innerHTML = '<div class="verdict good">Pays back by '+paybackLabel(base.payback)+' at €'+base.cpa.toFixed(2)+' CPA.</div>';
-    }
-
-    // Chart
+    // chart
     drawChart(base);
 
-    // Scenario table
+    // break-even row under chart
+    document.getElementById('beRow').innerHTML =
+      beItem('Current CPA', eur(base.cpa)) +
+      beItem('LTV M6', eur(base.ltv[6])) +
+      beItem('LTV M12', eur(base.ltv[12])) +
+      beItem('Break-even CPA M6', eur(base.ltv[6])) +
+      beItem('Break-even CPA M12', eur(base.ltv[12])) +
+      beItem('Payback month', paybackLabel(base.payback));
+
+    // scenario table
     var st = document.getElementById('scnTable');
     var sHead = '<thead><tr><th>CPA</th><th>Acquired users</th><th>ROAS M1</th><th>ROAS M3</th><th>ROAS M6</th><th>ROAS M12</th><th>Profit/Loss M6</th><th>Profit/Loss M12</th><th>Payback</th></tr></thead>';
     var sBody = '<tbody>';
@@ -451,15 +410,18 @@
         '<td>'+pctFmt(c.roas[3])+'</td>'+
         '<td>'+pctFmt(c.roas[6])+'</td>'+
         '<td>'+pctFmt(c.roas[12])+'</td>'+
-        '<td class="'+signClass(c.profit[6])+'">'+eur0(c.profit[6])+'</td>'+
-        '<td class="'+signClass(c.profit[12])+'">'+eur0(c.profit[12])+'</td>'+
+        '<td class="'+profitClass(c.profit[6])+'">'+eur0(c.profit[6])+'</td>'+
+        '<td class="'+profitClass(c.profit[12])+'">'+eur0(c.profit[12])+'</td>'+
         '<td class="payback-cell">'+paybackLabel(c.payback)+'</td>'+
       '</tr>';
     });
     sBody += '</tbody>';
     st.innerHTML = sHead+sBody;
 
-    // Monthly table
+    // final LTV M12
+    document.getElementById('finalLtv').textContent = eur(base.ltv[12]);
+
+    // monthly table
     var mt = document.getElementById('monthTable');
     var mHead = '<thead><tr><th>Period</th><th>Paying users</th><th>Monthly revenue</th><th>Cumulative revenue</th><th>LTV</th><th>ROAS</th><th>Profit/Loss</th></tr></thead>';
     var mBody = '<tbody>';
@@ -467,68 +429,57 @@
     for(var i=0;i<=12;i++){
       var isPay = (i===base.payback);
       mBody += '<tr'+(isPay?' class="row-payback"':'')+'>'+
-        '<td>'+periods[i]+(isPay?' ◀ payback':'')+'</td>'+
+        '<td>'+periods[i]+(isPay?' · payback':'')+'</td>'+
         '<td>'+usersFmt(base.paying[i])+'</td>'+
         '<td>'+eur0(base.monthlyRev[i])+'</td>'+
         '<td>'+eur0(base.cumRev[i])+'</td>'+
         '<td>'+eur(base.ltv[i])+'</td>'+
         '<td>'+pctFmt(base.roas[i])+'</td>'+
-        '<td class="'+signClass(base.profit[i])+'">'+eur0(base.profit[i])+'</td>'+
+        '<td class="'+profitClass(base.profit[i])+'">'+eur0(base.profit[i])+'</td>'+
       '</tr>';
     }
     mBody += '</tbody>';
     mt.innerHTML = mHead+mBody;
   }
 
+  function beItem(l,v){ return '<div class="be-item"><div class="be-l">'+l+'</div><div class="be-v">'+v+'</div></div>'; }
+
   // ---------- SVG chart ----------
   function drawChart(base){
-    var W=680, H=320, padL=54, padR=18, padT=18, padB=34;
-    var innerW = W-padL-padR, innerH = H-padT-padB;
-    var cpa = base.cpa;
-    var maxV = Math.max(base.ltv[12], cpa) * 1.12;
-    if(maxV<=0) maxV = 1;
-    var n = 13; // Trial..M12
-    var xLabels = ['T','1','2','3','4','5','6','7','8','9','10','11','12'];
+    var W=680,H=320,padL=54,padR=18,padT=18,padB=34;
+    var innerW=W-padL-padR, innerH=H-padT-padB;
+    var cpa=base.cpa;
+    var maxV=Math.max(base.ltv[12],cpa)*1.12; if(maxV<=0)maxV=1;
+    var n=13;
+    var xLabels=['T','1','2','3','4','5','6','7','8','9','10','11','12'];
+    function xPos(i){ return padL+innerW*(i/(n-1)); }
+    function yPos(v){ return padT+innerH*(1-v/maxV); }
 
-    function xPos(i){ return padL + innerW*(i/(n-1)); }
-    function yPos(v){ return padT + innerH*(1 - v/maxV); }
-
-    var svg = '<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" role="img" aria-label="Cumulative LTV vs CPA">';
-
-    // grid + y ticks
+    var svg='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" role="img" aria-label="Cumulative LTV vs CPA">';
     var ticks=4;
     for(var t=0;t<=ticks;t++){
-      var val = maxV*t/ticks;
-      var y = yPos(val);
-      svg += '<line x1="'+padL+'" y1="'+y+'" x2="'+(W-padR)+'" y2="'+y+'" stroke="#eef1f5"/>';
-      svg += '<text x="'+(padL-8)+'" y="'+(y+4)+'" text-anchor="end" font-size="10" fill="#8a93a0">€'+val.toFixed(0)+'</text>';
+      var val=maxV*t/ticks, y=yPos(val);
+      svg+='<line x1="'+padL+'" y1="'+y+'" x2="'+(W-padR)+'" y2="'+y+'" stroke="#eef1f5"/>';
+      svg+='<text x="'+(padL-8)+'" y="'+(y+4)+'" text-anchor="end" font-size="10" fill="#8a93a0">€'+val.toFixed(0)+'</text>';
     }
-    // x labels
     for(var i=0;i<n;i++){
-      svg += '<text x="'+xPos(i)+'" y="'+(H-12)+'" text-anchor="middle" font-size="10" fill="#8a93a0">'+xLabels[i]+'</text>';
+      svg+='<text x="'+xPos(i)+'" y="'+(H-12)+'" text-anchor="middle" font-size="10" fill="#8a93a0">'+xLabels[i]+'</text>';
     }
-    // CPA horizontal line
-    var yc = yPos(cpa);
-    svg += '<line x1="'+padL+'" y1="'+yc+'" x2="'+(W-padR)+'" y2="'+yc+'" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="6 4"/>';
-    svg += '<text x="'+(W-padR)+'" y="'+(yc-5)+'" text-anchor="end" font-size="10" fill="#c0392b">CPA €'+cpa.toFixed(0)+'</text>';
-
+    // CPA reference line (neutral dark gray dashed)
+    var yc=yPos(cpa);
+    svg+='<line x1="'+padL+'" y1="'+yc+'" x2="'+(W-padR)+'" y2="'+yc+'" stroke="#3a4048" stroke-width="1.5" stroke-dasharray="6 4"/>';
+    svg+='<text x="'+(W-padR)+'" y="'+(yc-5)+'" text-anchor="end" font-size="10" fill="#3a4048">CPA €'+cpa.toFixed(0)+'</text>';
     // LTV path
     var d='';
-    for(var k=0;k<n;k++){
-      d += (k===0?'M':'L')+xPos(k)+' '+yPos(base.ltv[k])+' ';
-    }
-    svg += '<path d="'+d+'" fill="none" stroke="#2f5fd0" stroke-width="2.5"/>';
-    // points
-    for(var p=0;p<n;p++){
-      svg += '<circle cx="'+xPos(p)+'" cy="'+yPos(base.ltv[p])+'" r="2.6" fill="#2f5fd0"/>';
-    }
-    // payback marker
+    for(var k=0;k<n;k++){ d+=(k===0?'M':'L')+xPos(k)+' '+yPos(base.ltv[k])+' '; }
+    svg+='<path d="'+d+'" fill="none" stroke="#2f5fd0" stroke-width="2.5"/>';
+    for(var p=0;p<n;p++){ svg+='<circle cx="'+xPos(p)+'" cy="'+yPos(base.ltv[p])+'" r="2.6" fill="#2f5fd0"/>'; }
     if(base.payback>=0){
-      var px = xPos(base.payback), py = yPos(base.ltv[base.payback]);
-      svg += '<circle cx="'+px+'" cy="'+py+'" r="5.5" fill="none" stroke="#1a7f4b" stroke-width="2"/>';
+      var px=xPos(base.payback),py=yPos(base.ltv[base.payback]);
+      svg+='<circle cx="'+px+'" cy="'+py+'" r="5.5" fill="none" stroke="#1a7f4b" stroke-width="2"/>';
     }
-    svg += '</svg>';
-    document.getElementById('chart').innerHTML = svg;
+    svg+='</svg>';
+    document.getElementById('chart').innerHTML=svg;
   }
 
   // ---------- reset ----------
@@ -539,7 +490,6 @@
     document.getElementById('usdEur').value = DEFAULTS.usdEur;
     document.getElementById('trialPrice').value = DEFAULTS.trialPrice;
     document.getElementById('monthlyPrice').value = DEFAULTS.monthlyPrice;
-    setMode('cohort');
     buildRetGrid();
     buildScenarios();
     render();
@@ -552,7 +502,6 @@
 
   buildRetGrid();
   buildScenarios();
-  updateModeExplain();
   render();
 })();
 </script>
